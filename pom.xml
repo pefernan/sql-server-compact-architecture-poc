@@ -186,7 +186,6 @@
     -->
 
     <!-- Jobs Service -->
-    <!--
     <dependency>
       <groupId>org.kie</groupId>
       <artifactId>kogito-addons-quarkus-jobs</artifactId>
@@ -195,7 +194,6 @@
       <groupId>org.kie.kogito</groupId>
       <artifactId>jobs-service-storage-jpa</artifactId>
     </dependency>
-    -->
 
     <!-- Data Audit -->
     <!--

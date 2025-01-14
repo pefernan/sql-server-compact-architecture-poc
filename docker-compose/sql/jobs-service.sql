@@ -13,7 +13,7 @@ CREATE TABLE job_details (
     scheduled_id character varying(40), -- the execution control on the scheduler (id on vertx.setTimer, quartzId...)
     priority integer,
     recipient nvarchar(MAX), -- http callback, event topic
-    [trigger] nvarchar(MAX),-- when/how it should be executed
+    job_trigger nvarchar(MAX),-- when/how it should be executed
     fire_time datetimeoffset,
     execution_timeout bigint,
     execution_timeout_unit character varying(40),
