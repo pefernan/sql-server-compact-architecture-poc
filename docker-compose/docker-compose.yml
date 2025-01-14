@@ -35,6 +35,29 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
 
+  mssql:
+    container_name: sql-server
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    profiles: [ "infra", "example-only", "full" ]
+    restart: no
+    hostname: mssql-host
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "Pass@123"
+      MSSQL_PID: Developer
+    ports:
+      - 1433:1433
+
+  mssql-tools:
+    image: mcr.microsoft.com/mssql-tools:latest
+    restart: no
+    command: "/opt/mssql-tools/bin/sqlcmd -S mssql-host -l 60 -U sa -P 'Pass@123' -d master -i /tmp/runtime-persistence.sql -i /tmp/user-tasks.sql"
+    depends_on:
+      - mssql
+    volumes:
+      - ./sql/runtime-persistence.sql:/tmp/runtime-persistence.sql
+      - ./sql/user-tasks.sql:/tmp/user-tasks.sql
+
   pgadmin:
     container_name: pgadmin
     image: dpage/pgadmin4:8.2
