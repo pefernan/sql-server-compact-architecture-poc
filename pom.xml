@@ -178,12 +178,10 @@
     </dependency>
 
     <!-- Data-Index Addon -->
-    <!--
     <dependency>
       <groupId>org.kie</groupId>
       <artifactId>kogito-addons-quarkus-data-index-jpa</artifactId>
     </dependency>
-    -->
 
     <!-- Jobs Service -->
     <dependency>
