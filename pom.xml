@@ -172,6 +172,11 @@
       <artifactId>kie-addons-quarkus-persistence-jdbc</artifactId>
     </dependency>
 
+    <dependency>
+      <groupId>org.jbpm</groupId>
+      <artifactId>jbpm-addons-quarkus-usertask-storage-jpa</artifactId>
+    </dependency>
+
     <!-- Data-Index Addon -->
     <!--
     <dependency>
