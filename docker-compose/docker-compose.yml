@@ -18,22 +18,6 @@
 #
 
 services:
-  postgres:
-    container_name: postgres
-    image: postgres:16.1-alpine3.19
-    profiles: ["infra", "example-only", "full"]
-    ports:
-      - "5432:5432"
-    volumes:
-      - ./sql:/docker-entrypoint-initdb.d:Z
-    healthcheck:
-      test: ["CMD", "pg_isready", "-q", "-d", "kogito", "-U", "kogito-user"]
-      timeout: 45s
-      interval: 10s
-      retries: 50
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
 
   mssql:
     container_name: sql-server
@@ -47,6 +31,12 @@ services:
       MSSQL_PID: Developer
     ports:
       - 1433:1433
+    healthcheck:
+      test: [ "CMD", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P StrongP@assword! -Q 'SELECT 1' || exit 1" ]
+      interval: 10s
+      retries: 10
+      start_period: 10s
+      timeout: 3s
 
   mssql-tools:
     image: mcr.microsoft.com/mssql-tools:latest
@@ -57,30 +47,6 @@ services:
     volumes:
       - ./sql/runtime-persistence.sql:/tmp/runtime-persistence.sql
       - ./sql/user-tasks.sql:/tmp/user-tasks.sql
-
-  pgadmin:
-    container_name: pgadmin
-    image: dpage/pgadmin4:8.2
-    profiles: ["infra", "example-only", "full"]
-    ports:
-      - 8055:80
-    depends_on:
-      - postgres
-    volumes:
-      - ./pgadmin/servers.json:/pgadmin4/servers.json
-      - ./pgadmin/pgpass:/pgadmin4/pgpass
-    entrypoint: >
-      /bin/sh -c "
-      cp -f /pgadmin4/pgpass /var/lib/pgadmin/;
-      chmod 600 /var/lib/pgadmin/pgpass;
-      /entrypoint.sh
-      "
-    environment:
-      PGADMIN_DEFAULT_EMAIL: user@kogito.org
-      PGADMIN_DEFAULT_PASSWORD: pass
-      PGADMIN_CONFIG_SERVER_MODE: "False"
-      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: "False"
-      GUNICORN_ACCESS_LOGFILE: "/dev/null"
 
   process-compact-architecture-service:
     container_name: process-compact-architecture-service

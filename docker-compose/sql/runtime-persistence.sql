@@ -13,7 +13,7 @@ CREATE TABLE correlation_instances (
     id character(36) NOT NULL,
     encoded_correlation_id character varying(36) NOT NULL,
     correlated_id character varying(36) NOT NULL,
-    correlation character varying NOT NULL,
+    correlation character varying(255) NOT NULL,
     version bigint
 );
 
@@ -21,9 +21,9 @@ CREATE TABLE correlation_instances (
 CREATE TABLE process_instances (
     id character(36) NOT NULL,
     payload varbinary(MAX) NOT NULL,
-    process_id character varying NOT NULL,
+    process_id character varying(255) NOT NULL,
     version bigint,
-    process_version character varying
+    process_version character varying(36)
 );
 
 ALTER TABLE business_key_mapping
