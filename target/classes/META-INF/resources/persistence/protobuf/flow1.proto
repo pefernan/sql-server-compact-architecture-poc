@@ -1,0 +1,15 @@
+syntax = "proto2"; 
+package org.kogito.poc.flow1; 
+import "kogito-index.proto";
+import "kogito-types.proto";
+option kogito_model = "Flow1";
+option kogito_id = "flow1";
+
+/* @Indexed */ 
+message Flow1 { 
+	option java_package = "org.kogito.poc";
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional string id = 1; 
+	/* @Field(index = Index.YES, store = Store.YES) @SortableField */ 
+	optional org.kie.kogito.index.model.KogitoMetadata metadata = 2; 
+}
