@@ -194,7 +194,6 @@
     </dependency>
 
     <!-- Data Audit -->
-    <!--
     <dependency>
       <groupId>org.kie</groupId>
       <artifactId>kogito-addons-quarkus-data-audit-jpa</artifactId>
@@ -203,7 +202,6 @@
       <groupId>org.kie</groupId>
       <artifactId>kogito-addons-quarkus-data-audit</artifactId>
     </dependency>
-    -->
 
     <dependency>
       <groupId>org.jbpm</groupId>
