@@ -64,7 +64,6 @@ services:
     environment:
       QUARKUS_HTTP_CORS_ORIGINS: "/.*/"
       QUARKUS_DATASOURCE_JDBC_URL: "jdbc:sqlserver://mssql-host:1433;DatabaseName=master;encrypt=true;trustServerCertificate=true;"
-      QUARKUS_DATASOURCE_REACTIVE_URL: "postgresql://postgres:5432/kogito"
       QUARKUS_DATASOURCE_USERNAME: sa
       QUARKUS_DATASOURCE_PASSWORD: 'Pass@123'
       QUARKUS_DATASOURCE_DB_KIND: mssql
