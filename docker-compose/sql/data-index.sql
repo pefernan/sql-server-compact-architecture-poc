@@ -7,7 +7,7 @@ CREATE TABLE attachments (
     id character varying(255) NOT NULL,
     content character varying(255),
     name character varying(255),
-    updated_at datetime2,
+    updated_at datetimeoffset(6),
     updated_by character varying(255),
     task_id character varying(255) NOT NULL
 );
@@ -16,13 +16,13 @@ CREATE TABLE attachments (
 CREATE TABLE comments (
     id character varying(255) NOT NULL,
     content character varying(1000),
-    updated_at datetime2,
+    updated_at datetimeoffset(6),
     updated_by character varying(255),
     task_id character varying(255) NOT NULL
 );
 
 -- TABLE definitions: process definitions that has been deployed
-CREATE TABLE definitions (
+CREATE TABLE process_definitions (
     id character varying(255) NOT NULL,
     version character varying(255) NOT NULL,
     name character varying(255),
@@ -86,8 +86,8 @@ CREATE TABLE jobs (
     callback_endpoint character varying(255),
     endpoint character varying(255),
     execution_counter integer,
-    expiration_time datetime2,
-    last_update datetime2,
+    expiration_time datetimeoffset(6),
+    last_update datetimeoffset(6),
     node_instance_id character varying(255),
     priority integer,
     process_id character varying(255),
@@ -120,36 +120,36 @@ CREATE TABLE milestones (
 CREATE TABLE nodes (
     id character varying(255) NOT NULL,
     definition_id character varying(255),
-    enter datetime2,
-    [exit] datetime2,
+    enter_time datetimeoffset(6),
+    exit_time datetimeoffset(6),
     name character varying(255),
     node_id character varying(255),
     type character varying(255),
     process_instance_id character varying(255) NOT NULL,
-    sla_due_date datetime2
+    sla_due_date datetimeoffset(6)
 );
 
 -- TABLE processes: last state of the process instance
 CREATE TABLE processes (
     id character varying(255) NOT NULL,
     business_key character varying(255),
-    end_time datetime2,
+    end_time datetimeoffset(6),
     endpoint character varying(255),
     message character varying(max),
     node_definition_id character varying(255),
-    last_update_time datetime2,
+    last_update_time datetimeoffset(6),
     parent_process_instance_id character varying(255),
     process_id character varying(255),
     process_name character varying(255),
     root_process_id character varying(255),
     root_process_instance_id character varying(255),
-    start_time datetime2,
+    start_time datetimeoffset(6),
     state integer,
     variables nvarchar(max),
     version character varying(255),
     created_by character varying(max),
     updated_by character varying(max),
-    sla_due_date datetime2
+    sla_due_date datetimeoffset(6)
 );
 
 -- TABLE processes_addons: addons this process instance is being executed with
@@ -168,11 +168,11 @@ CREATE TABLE processes_roles (
 CREATE TABLE tasks (
     id character varying(255) NOT NULL,
     actual_owner character varying(255),
-    completed datetime2,
+    completed datetimeoffset(6),
     description character varying(255),
     endpoint character varying(255),
     inputs nvarchar(max),
-    last_update datetime2,
+    last_update datetimeoffset(6),
     name character varying(255),
     outputs nvarchar(max),
     priority character varying(255),
@@ -181,10 +181,10 @@ CREATE TABLE tasks (
     reference_name character varying(255),
     root_process_id character varying(255),
     root_process_instance_id character varying(255),
-    started datetime2,
+    started datetimeoffset(6),
     state character varying(255),
     external_reference_id character varying(4000),
-    sla_due_date datetime2
+    sla_due_date datetimeoffset(6)
 );
 
 -- TABLE tasks_admin_groups: user task instance admin groups assigned
@@ -238,7 +238,7 @@ ALTER TABLE definitions_nodes_metadata
 ALTER TABLE definitions_nodes
     ADD CONSTRAINT definitions_nodes_pkey PRIMARY KEY (id, process_id, process_version);
 
-ALTER TABLE definitions
+ALTER TABLE process_definitions
     ADD CONSTRAINT definitions_pkey PRIMARY KEY (id, version);
 
 ALTER TABLE definitions_roles
@@ -324,22 +324,22 @@ ALTER TABLE comments
     ADD CONSTRAINT fk_comments_tasks FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE;
 
 ALTER TABLE definitions_addons
-    ADD CONSTRAINT fk_definitions_addons_definitions FOREIGN KEY (process_id, process_version) REFERENCES definitions(id, version) ON DELETE CASCADE;
+    ADD CONSTRAINT fk_definitions_addons_definitions FOREIGN KEY (process_id, process_version) REFERENCES process_definitions(id, version) ON DELETE CASCADE;
 
 ALTER TABLE definitions_annotations
-    ADD CONSTRAINT fk_definitions_annotations FOREIGN KEY (process_id, process_version) REFERENCES definitions(id, version) ON DELETE CASCADE;
+    ADD CONSTRAINT fk_definitions_annotations FOREIGN KEY (process_id, process_version) REFERENCES process_definitions(id, version) ON DELETE CASCADE;
 
 ALTER TABLE definitions_metadata
-    ADD CONSTRAINT fk_definitions_metadata FOREIGN KEY (process_id, process_version) REFERENCES definitions(id, version) ON DELETE CASCADE;
+    ADD CONSTRAINT fk_definitions_metadata FOREIGN KEY (process_id, process_version) REFERENCES process_definitions(id, version) ON DELETE CASCADE;
 
 ALTER TABLE definitions_nodes
-    ADD CONSTRAINT fk_definitions_nodes_definitions FOREIGN KEY (process_id, process_version) REFERENCES definitions(id, version) ON DELETE CASCADE;
+    ADD CONSTRAINT fk_definitions_nodes_definitions FOREIGN KEY (process_id, process_version) REFERENCES process_definitions(id, version) ON DELETE CASCADE;
 
 ALTER TABLE definitions_nodes_metadata
     ADD CONSTRAINT fk_definitions_nodes_metadata_definitions_nodes FOREIGN KEY (node_id, process_id, process_version) REFERENCES definitions_nodes(id, process_id, process_version) ON DELETE CASCADE;
 
 ALTER TABLE definitions_roles
-    ADD CONSTRAINT fk_definitions_roles_definitions FOREIGN KEY (process_id, process_version) REFERENCES definitions(id, version) ON DELETE CASCADE;
+    ADD CONSTRAINT fk_definitions_roles_definitions FOREIGN KEY (process_id, process_version) REFERENCES process_definitions(id, version) ON DELETE CASCADE;
 
 ALTER TABLE milestones
     ADD CONSTRAINT fk_milestones_process FOREIGN KEY (process_instance_id) REFERENCES processes(id) ON DELETE CASCADE;
