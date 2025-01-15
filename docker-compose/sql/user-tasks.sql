@@ -1,3 +1,5 @@
+USE bamoe;
+
 --
 -- User tasks subsystem tables
 --
@@ -133,17 +135,17 @@ CREATE TABLE jbpm_user_tasks_reassignment_timer (
 
 CREATE SEQUENCE jbpm_user_tasks_deadline_seq
     START WITH 1
-    INCREMENT BY 50
+    INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
-    CACHE 1;
+    CACHE 50;
 
 CREATE SEQUENCE jbpm_user_tasks_reassignment_seq
     START WITH 1
-    INCREMENT BY 50
+    INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
-    CACHE 1;
+    CACHE 50;
 
 ALTER TABLE jbpm_user_tasks
     ADD CONSTRAINT jbpm_user_tasks_pkey PRIMARY KEY (id);

@@ -1,3 +1,5 @@
+USE bamoe;
+
 --
 -- Data audit uses below tables
 --
@@ -11,10 +13,10 @@ CREATE TABLE audit_query (
 
 CREATE SEQUENCE job_execution_history_id_seq
     START WITH 1
-    INCREMENT BY 50
+    INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
-    CACHE 1;
+    CACHE 50;
 
 -- TABLE job_execution_log: historical records of events of job execution
 CREATE TABLE job_execution_log (
@@ -53,10 +55,10 @@ CREATE TABLE process_instance_error_log (
 
 CREATE SEQUENCE process_instance_error_log_seq_id
     START WITH 1
-    INCREMENT BY 50
+    INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
-    CACHE 1;
+    CACHE 50;
 
 -- TABLE process_instance_node_log: historical record of node instance executions
 CREATE TABLE process_instance_node_log (
@@ -85,10 +87,10 @@ CREATE TABLE process_instance_node_log (
 
 CREATE SEQUENCE process_instance_node_log_id_seq
     START WITH 1
-    INCREMENT BY 50
+    INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
-    CACHE 1;
+    CACHE 50;
 
 -- TABLE process_instance_state_log: historical record of node state change during executions
 CREATE TABLE process_instance_state_log (
@@ -112,10 +114,10 @@ CREATE TABLE process_instance_state_log (
 
 CREATE SEQUENCE process_instance_state_log_id_seq
     START WITH 1
-    INCREMENT BY 50
+    INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
-    CACHE 1;
+    CACHE 50;
 
 -- TABLE process_instance_state_roles_log: historical record of process instance state changed during execution
 CREATE TABLE process_instance_state_roles_log (
@@ -143,10 +145,10 @@ CREATE TABLE process_instance_variable_log (
 
 CREATE SEQUENCE process_instance_variable_log_id_seq
     START WITH 1
-    INCREMENT BY 50
+    INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
-    CACHE 1;
+    CACHE 50;
 
 -- TABLE  task_instance_assignment_log: historical record of assignments in user task instance
 CREATE TABLE task_instance_assignment_log (
@@ -164,10 +166,10 @@ CREATE TABLE task_instance_assignment_log (
 
 CREATE SEQUENCE task_instance_assignment_log_id_seq
     START WITH 1
-    INCREMENT BY 50
+    INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
-    CACHE 1;
+    CACHE 50;
 
 -- TABLE task_instance_assignment_users_log: historical record of assignments in user task instance
 CREATE TABLE task_instance_assignment_users_log (
@@ -193,10 +195,10 @@ CREATE TABLE task_instance_attachment_log (
 
 CREATE SEQUENCE task_instance_attachment_log_id_seq
     START WITH 1
-    INCREMENT BY 50
+    INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
-    CACHE 1;
+    CACHE 50;
 
 -- TABLE task_instance_comment_log: historical record of user task instance comments
 CREATE TABLE task_instance_comment_log (
@@ -215,10 +217,10 @@ CREATE TABLE task_instance_comment_log (
 
 CREATE SEQUENCE task_instance_comment_log_id_seq
     START WITH 1
-    INCREMENT BY 50
+    INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
-    CACHE 1;
+    CACHE 50;
 
 -- TABLE task_instance_deadline_log: historical record of user task instance deadlines change
 CREATE TABLE task_instance_deadline_log (
@@ -235,10 +237,10 @@ CREATE TABLE task_instance_deadline_log (
 
 CREATE SEQUENCE task_instance_deadline_log_id_seq
     START WITH 1
-    INCREMENT BY 50
+    INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
-    CACHE 1;
+    CACHE 50;
 
 -- TABLE task_instance_deadline_notification_log: historical record of user task instance deadlines notifications
 CREATE TABLE task_instance_deadline_notification_log (
@@ -266,10 +268,10 @@ CREATE TABLE task_instance_state_log (
 
 CREATE SEQUENCE task_instance_state_log_id_seq
     START WITH 1
-    INCREMENT BY 50
+    INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
-    CACHE 1;
+    CACHE 50;
 
 -- TABLE task_instance_variable_log: historical record of user task instance input/output variables change
 CREATE TABLE task_instance_variable_log (
@@ -290,10 +292,10 @@ CREATE TABLE task_instance_variable_log (
 
 CREATE SEQUENCE task_instance_variable_log_id_seq
     START WITH 1
-    INCREMENT BY 50
+    INCREMENT BY 1
     NO MINVALUE
     NO MAXVALUE
-    CACHE 1;
+    CACHE 50;
 
 ALTER TABLE audit_query
     ADD CONSTRAINT audit_query_pkey PRIMARY KEY (identifier);

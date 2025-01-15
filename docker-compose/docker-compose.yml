@@ -40,12 +40,14 @@ services:
 
   mssql-tools:
     image: mcr.microsoft.com/mssql-tools:latest
+    profiles: [ "infra", "example-only", "full" ]
     restart: no
-    command: "/opt/mssql-tools/bin/sqlcmd -S mssql-host -l 60 -U sa -P 'Pass@123' -d master -i /tmp/runtime-persistence.sql -i /tmp/user-tasks.sql -i /tmp/data-index.sql -i /tmp/jobs-service.sql -i /tmp/data-audit.sql"
+    command: "/opt/mssql-tools/bin/sqlcmd -S mssql-host -l 60 -U sa -P 'Pass@123' -d master -i /tmp/init.sql -i /tmp/runtime-persistence.sql -i /tmp/user-tasks.sql -i /tmp/data-index.sql -i /tmp/jobs-service.sql -i /tmp/data-audit.sql"
     depends_on:
       mssql:
         condition: service_healthy
     volumes:
+      - ./sql/init.sql:/tmp/init.sql
       - ./sql/runtime-persistence.sql:/tmp/runtime-persistence.sql
       - ./sql/user-tasks.sql:/tmp/user-tasks.sql
       - ./sql/data-index.sql:/tmp/data-index.sql
@@ -63,7 +65,7 @@ services:
         condition: service_healthy
     environment:
       QUARKUS_HTTP_CORS_ORIGINS: "/.*/"
-      QUARKUS_DATASOURCE_JDBC_URL: "jdbc:sqlserver://mssql-host:1433;DatabaseName=master;encrypt=true;trustServerCertificate=true;"
+      QUARKUS_DATASOURCE_JDBC_URL: "jdbc:sqlserver://mssql-host:1433;DatabaseName=bamoe;encrypt=true;trustServerCertificate=true;"
       QUARKUS_DATASOURCE_USERNAME: sa
       QUARKUS_DATASOURCE_PASSWORD: 'Pass@123'
       QUARKUS_DATASOURCE_DB_KIND: mssql

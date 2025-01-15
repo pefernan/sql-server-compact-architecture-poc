@@ -1,3 +1,5 @@
+USE bamoe;
+
 --
 -- It contains all the required Tables used by runtime persistence.
 --

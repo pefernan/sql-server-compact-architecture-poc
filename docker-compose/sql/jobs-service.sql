@@ -1,3 +1,5 @@
+USE bamoe;
+
 --
 -- It contains all the required Tables to correctly manage and persist Job Instances
 --

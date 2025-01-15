@@ -1,3 +1,5 @@
+USE bamoe;
+
 --
 -- Data index uses below tables
 --
