@@ -80,7 +80,7 @@ CREATE TABLE process_instance_node_log (
     node_type character varying(255),
     sla_due_date datetime2(6),
     work_item_id character varying(255),
-    CONSTRAINT process_instance_node_log_event_type_check CHECK (((event_type)::text = ANY ((ARRAY['ENTER'::character varying, 'EXIT'::character varying, 'ABORTED'::character varying, 'ASYNC_ENTER'::character varying, 'OBSOLETE'::character varying, 'SKIPPED'::character varying, 'ERROR'::character varying, 'SLA_VIOLATION'::character varying])::text[])))
+    CONSTRAINT process_instance_node_log_event_type_check CHECK (event_type IN ('ENTER', 'EXIT', 'ABORTED', 'ASYNC_ENTER', 'OBSOLETE', 'SKIPPED', 'ERROR', 'SLA_VIOLATION'))
 );
 
 CREATE SEQUENCE process_instance_node_log_id_seq
@@ -107,7 +107,7 @@ CREATE TABLE process_instance_state_log (
     outcome character varying(255),
     sla_due_date datetime2(6),
     state character varying(255),
-    CONSTRAINT process_instance_state_log_event_type_check CHECK (((event_type)::text = ANY ((ARRAY['ACTIVE'::character varying, 'COMPLETED'::character varying, 'SLA_VIOLATION'::character varying, 'MIGRATED'::character varying])::text[])))
+    CONSTRAINT process_instance_state_log_event_type_check CHECK (event_type IN ('ACTIVE', 'COMPLETED', 'SLA_VIOLATION', 'MIGRATED'))
 );
 
 CREATE SEQUENCE process_instance_state_log_id_seq
@@ -285,7 +285,7 @@ CREATE TABLE task_instance_variable_log (
     variable_name character varying(255),
     variable_type character varying(255),
     variable_value character varying(255),
-    CONSTRAINT task_instance_variable_log_variable_type_check CHECK (((variable_type)::text = ANY ((ARRAY['INPUT'::character varying, 'OUTPUT'::character varying])::text[])))
+    CONSTRAINT task_instance_variable_log_variable_type_check CHECK (variable_type IN ('INPUT', 'OUTPUT'))
 );
 
 CREATE SEQUENCE task_instance_variable_log_id_seq
