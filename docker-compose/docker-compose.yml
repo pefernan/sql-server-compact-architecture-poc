@@ -32,7 +32,7 @@ services:
     ports:
       - 1433:1433
     healthcheck:
-      test: [ "CMD", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P Pass@123 -Q 'SELECT 1' || exit 1" ]
+      test: [ "CMD", "/opt/mssql-tools18/bin/sqlcmd", "-S", "mssql-host", "-U", "sa", "-P", "Pass@123", "-No", "-Q", "SELECT 1" ]
       interval: 10s
       retries: 10
       start_period: 10s
@@ -43,7 +43,8 @@ services:
     restart: no
     command: "/opt/mssql-tools/bin/sqlcmd -S mssql-host -l 60 -U sa -P 'Pass@123' -d master -i /tmp/runtime-persistence.sql -i /tmp/user-tasks.sql -i /tmp/data-index.sql -i /tmp/jobs-service.sql -i /tmp/data-audit.sql"
     depends_on:
-      - mssql
+      mssql:
+        condition: service_healthy
     volumes:
       - ./sql/runtime-persistence.sql:/tmp/runtime-persistence.sql
       - ./sql/user-tasks.sql:/tmp/user-tasks.sql
@@ -58,47 +59,47 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      postgres:
+      mssql:
         condition: service_healthy
     environment:
       QUARKUS_HTTP_CORS_ORIGINS: "/.*/"
-      QUARKUS_DATASOURCE_JDBC_URL: "jdbc:postgresql://postgres:5432/kogito"
+      QUARKUS_DATASOURCE_JDBC_URL: "jdbc:sqlserver://mssql-host:1433;DatabaseName=master;encrypt=true;trustServerCertificate=true;"
       QUARKUS_DATASOURCE_REACTIVE_URL: "postgresql://postgres:5432/kogito"
-      QUARKUS_DATASOURCE_USERNAME: kogito-user
-      QUARKUS_DATASOURCE_PASSWORD: kogito-pass
-      QUARKUS_DATASOURCE_DB_KIND: postgresql
+      QUARKUS_DATASOURCE_USERNAME: sa
+      QUARKUS_DATASOURCE_PASSWORD: 'Pass@123'
+      QUARKUS_DATASOURCE_DB_KIND: mssql
       KOGITO_JOBS_SERVICE_URL: http://${DOCKER_GATEWAY_HOST}:8080
       KOGITO_SERVICE_URL: http://${DOCKER_GATEWAY_HOST}:8080
       KOGITO_DATAINDEX_HTTP_URL: http://${DOCKER_GATEWAY_HOST}:8080
     extra_hosts:
       - "${DOCKER_GATEWAY_HOST}:host-gateway"
 
-  keycloak:
-    container_name: keycloak
-    image: quay.io/keycloak/keycloak:legacy
-    profiles: ["full"]
-    ports:
-      - "8480:8080"
-    depends_on:
-      postgres:
-        condition: service_healthy
-    volumes:
-      - ./keycloak/kogito-realm.json:/tmp/kogito-realm.json
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/auth/realms/kogito"]
-      interval: 2s
-      timeout: 1s
-      retries: 50
-    environment:
-      DB_VENDOR: POSTGRES
-      DB_ADDR: postgres
-      DB_DATABASE: keycloak
-      DB_USER: kogito-user
-      DB_SCHEMA: public
-      DB_PASSWORD: kogito-pass
-      KEYCLOAK_USER: admin
-      KEYCLOAK_PASSWORD: admin
-      KEYCLOAK_IMPORT: /tmp/kogito-realm.json
+#  keycloak:
+#    container_name: keycloak
+#    image: quay.io/keycloak/keycloak:legacy
+#    profiles: ["full"]
+#    ports:
+#      - "8480:8080"
+#    depends_on:
+#      postgres:
+#        condition: service_healthy
+#    volumes:
+#      - ./keycloak/kogito-realm.json:/tmp/kogito-realm.json
+#    healthcheck:
+#      test: ["CMD", "curl", "-f", "http://localhost:8080/auth/realms/kogito"]
+#      interval: 2s
+#      timeout: 1s
+#      retries: 50
+#    environment:
+#      DB_VENDOR: POSTGRES
+#      DB_ADDR: postgres
+#      DB_DATABASE: keycloak
+#      DB_USER: kogito-user
+#      DB_SCHEMA: public
+#      DB_PASSWORD: kogito-pass
+#      KEYCLOAK_USER: admin
+#      KEYCLOAK_PASSWORD: admin
+#      KEYCLOAK_IMPORT: /tmp/kogito-realm.json
 
   management-console:
     container_name: management-console
