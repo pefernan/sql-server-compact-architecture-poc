@@ -13,7 +13,7 @@ CREATE TABLE audit_query (
 
 CREATE SEQUENCE job_execution_history_id_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 50
     NO MINVALUE
     NO MAXVALUE
     CACHE 50;
@@ -55,7 +55,7 @@ CREATE TABLE process_instance_error_log (
 
 CREATE SEQUENCE process_instance_error_log_seq_id
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 50
     NO MINVALUE
     NO MAXVALUE
     CACHE 50;
@@ -87,7 +87,7 @@ CREATE TABLE process_instance_node_log (
 
 CREATE SEQUENCE process_instance_node_log_id_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 50
     NO MINVALUE
     NO MAXVALUE
     CACHE 50;
@@ -114,7 +114,7 @@ CREATE TABLE process_instance_state_log (
 
 CREATE SEQUENCE process_instance_state_log_id_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 50
     NO MINVALUE
     NO MAXVALUE
     CACHE 50;
@@ -145,7 +145,7 @@ CREATE TABLE process_instance_variable_log (
 
 CREATE SEQUENCE process_instance_variable_log_id_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 50
     NO MINVALUE
     NO MAXVALUE
     CACHE 50;
@@ -166,7 +166,7 @@ CREATE TABLE task_instance_assignment_log (
 
 CREATE SEQUENCE task_instance_assignment_log_id_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 50
     NO MINVALUE
     NO MAXVALUE
     CACHE 50;
@@ -195,7 +195,7 @@ CREATE TABLE task_instance_attachment_log (
 
 CREATE SEQUENCE task_instance_attachment_log_id_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 50
     NO MINVALUE
     NO MAXVALUE
     CACHE 50;
@@ -217,7 +217,7 @@ CREATE TABLE task_instance_comment_log (
 
 CREATE SEQUENCE task_instance_comment_log_id_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 50
     NO MINVALUE
     NO MAXVALUE
     CACHE 50;
@@ -237,7 +237,7 @@ CREATE TABLE task_instance_deadline_log (
 
 CREATE SEQUENCE task_instance_deadline_log_id_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 50
     NO MINVALUE
     NO MAXVALUE
     CACHE 50;
@@ -268,7 +268,7 @@ CREATE TABLE task_instance_state_log (
 
 CREATE SEQUENCE task_instance_state_log_id_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 50
     NO MINVALUE
     NO MAXVALUE
     CACHE 50;
@@ -292,7 +292,7 @@ CREATE TABLE task_instance_variable_log (
 
 CREATE SEQUENCE task_instance_variable_log_id_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 50
     NO MINVALUE
     NO MAXVALUE
     CACHE 50;
