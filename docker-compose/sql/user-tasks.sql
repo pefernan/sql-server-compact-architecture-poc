@@ -135,14 +135,14 @@ CREATE TABLE jbpm_user_tasks_reassignment_timer (
 
 CREATE SEQUENCE jbpm_user_tasks_deadline_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 50
     NO MINVALUE
     NO MAXVALUE
     CACHE 50;
 
 CREATE SEQUENCE jbpm_user_tasks_reassignment_seq
     START WITH 1
-    INCREMENT BY 1
+    INCREMENT BY 50
     NO MINVALUE
     NO MAXVALUE
     CACHE 50;
