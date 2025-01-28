@@ -60,6 +60,7 @@ services:
     profiles: ["example-only", "full"]
     ports:
       - "8080:8080"
+      - "5005:5005"
     depends_on:
       mssql:
         condition: service_healthy
@@ -72,6 +73,8 @@ services:
       KOGITO_JOBS_SERVICE_URL: http://${DOCKER_GATEWAY_HOST}:8080
       KOGITO_SERVICE_URL: http://${DOCKER_GATEWAY_HOST}:8080
       KOGITO_DATAINDEX_HTTP_URL: http://${DOCKER_GATEWAY_HOST}:8080
+      JAVA_DEBUG: true
+      JAVA_DEBUG_PORT: "*:5005"
     extra_hosts:
       - "${DOCKER_GATEWAY_HOST}:host-gateway"
 

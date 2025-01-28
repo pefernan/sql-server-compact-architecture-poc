@@ -66,7 +66,7 @@
     <version.kie.tools>0.0.0</version.kie.tools>
 
     <!-- Quarkus -->
-    <version.quarkus>3.8.6</version.quarkus>
+    <version.quarkus>3.15.3</version.quarkus>
 
   <kogito.management-console.image
     >docker.io/apache/incubator-kie-kogito-management-console:main</kogito.management-console.image>
@@ -97,13 +97,13 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
-      <dependency>
+      <!--<dependency>
         <groupId>org.jbpm</groupId>
         <artifactId>jbpm-quarkus-devui-bom</artifactId>
         <version>${version.kie.tools}</version>
         <type>pom</type>
         <scope>import</scope>
-      </dependency>
+      </dependency>-->
 
       <!-- Quarkus -->
 
@@ -172,41 +172,41 @@
       <artifactId>kie-addons-quarkus-persistence-jdbc</artifactId>
     </dependency>
 
-    <dependency>
+    <!--<dependency>
       <groupId>org.jbpm</groupId>
       <artifactId>jbpm-addons-quarkus-usertask-storage-jpa</artifactId>
-    </dependency>
+    </dependency>-->
 
     <!-- Data-Index Addon -->
-    <dependency>
+    <!--<dependency>
       <groupId>org.kie</groupId>
       <artifactId>kogito-addons-quarkus-data-index-jpa</artifactId>
-    </dependency>
+    </dependency>-->
 
     <!-- Jobs Service -->
-    <dependency>
+    <!--<dependency>
       <groupId>org.kie</groupId>
       <artifactId>kogito-addons-quarkus-jobs</artifactId>
     </dependency>
     <dependency>
       <groupId>org.kie.kogito</groupId>
       <artifactId>jobs-service-storage-jpa</artifactId>
-    </dependency>
+    </dependency>-->
 
     <!-- Data Audit -->
-    <dependency>
+    <!--<dependency>
       <groupId>org.kie</groupId>
       <artifactId>kogito-addons-quarkus-data-audit-jpa</artifactId>
     </dependency>
     <dependency>
       <groupId>org.kie</groupId>
       <artifactId>kogito-addons-quarkus-data-audit</artifactId>
-    </dependency>
+    </dependency>-->
 
-    <dependency>
+    <!--<dependency>
       <groupId>org.jbpm</groupId>
       <artifactId>jbpm-quarkus-devui</artifactId>
-    </dependency>
+    </dependency>-->
   </dependencies>
 
   <profiles>
