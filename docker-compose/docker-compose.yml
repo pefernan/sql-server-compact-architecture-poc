@@ -42,7 +42,7 @@ services:
     image: mcr.microsoft.com/mssql-tools:latest
     profiles: [ "infra", "example-only", "full" ]
     restart: no
-    command: "/opt/mssql-tools/bin/sqlcmd -S mssql-host -l 60 -U sa -P 'Pass@123' -d master -i /tmp/init.sql -i /tmp/runtime-persistence.sql -i /tmp/user-tasks.sql -i /tmp/data-index.sql -i /tmp/jobs-service.sql -i /tmp/data-audit.sql"
+    command: "/opt/mssql-tools/bin/sqlcmd -S mssql-host -l 60 -U sa -P 'Pass@123' -d master -i /tmp/init.sql"
     depends_on:
       mssql:
         condition: service_healthy
